@@ -1,0 +1,4 @@
+QRCode.js third-party component
+Source: https://github.com/davidshimjs/qrcodejs
+License: MIT License (see upstream repository for full license text).
+Bundled file: assets/qrcode.min.js
