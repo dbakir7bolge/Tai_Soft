@@ -62,3 +62,10 @@ QR kod başka telefonlarda açılacaksa uygulama klasörü internette erişilebi
 - Profil paylaşımı URL'nin `#` fragment bölümünü kullanır; bu bölüm normal HTTP isteğinde sunucuya gönderilmez.
 - GitHub Pages gibi herkese açık bir host üzerinde uygulama kaynak kodu ve varsayılan içerik herkese açıktır.
 - Kartta yalnızca paylaşılması uygun iletişim bilgilerini kullanın.
+
+
+## v1.1 Güncellemesi
+
+- Profil resmi seçildiğinde dijital kartvizitte baş harf yerine doğrudan seçilen resim gösterilir.
+- Düzenleme penceresinde aynı anda hem baş harf hem resim görünme sorunu giderildi.
+- Profil resmi ekleme/kaldırma işlemi anında önizlenir.
