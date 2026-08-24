@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4a4a4a">
+  <meta name="description" content="TaiSoft dijital kartvizit uygulaması">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="TaiSoft Kart">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+  <link rel="stylesheet" href="assets/app.css">
+  <title>TaiSoft Dijital Kartvizit</title>
+</head>
+<body>
+  <main class="shell" id="app">
+    <section class="card" aria-label="Dijital kartvizit">
+      <div class="hero">
+        <img class="brand-logo" src="assets/logo.png" alt="TaiSoft logosu">
+        <div class="hero-actions">
+          <button class="icon-btn" id="installBtn" type="button" title="Uygulamayı yükle" aria-label="Uygulamayı yükle">⬇</button>
+          <button class="icon-btn" id="editBtn" type="button" title="Kartı düzenle" aria-label="Kartı düzenle">✎</button>
+        </div>
+      </div>
+
+      <div class="identity">
+        <div class="profile-wrap" aria-label="Profil görseli">
+          <div class="monogram" id="monogram">TK</div>
+          <img class="profile-photo" id="profilePhoto" alt="Profil resmi" hidden>
+        </div>
+        <div class="identity-copy">
+          <h1 id="nameText">Ad Soyad</h1>
+          <p class="title" id="titleText">Ünvan</p>
+          <p class="unit" id="unitText">Birim / Açıklama</p>
+        </div>
+      </div>
+
+      <div class="quick-grid" id="quickActions">
+        <a class="quick" id="call1Action" href="#"><span>☎</span><strong>Ara</strong></a>
+        <a class="quick" id="waAction" href="#"><span>◉</span><strong>WhatsApp</strong></a>
+        <a class="quick" id="mailAction" href="#"><span>✉</span><strong>E-posta</strong></a>
+        <a class="quick" id="mapAction" href="#"><span>⌖</span><strong>Harita</strong></a>
+      </div>
+
+      <section class="details" aria-label="İletişim bilgileri">
+        <a class="detail-row" id="phone1Row" href="#"><span class="detail-icon">☎</span><span><small>Telefon 1</small><b id="phone1Text">—</b></span></a>
+        <a class="detail-row" id="phone2Row" href="#"><span class="detail-icon">☎</span><span><small>Telefon 2</small><b id="phone2Text">—</b></span></a>
+        <a class="detail-row" id="emailRow" href="#"><span class="detail-icon">✉</span><span><small>Kurumsal e-posta</small><b id="emailText">—</b></span></a>
+        <a class="detail-row" id="websiteRow" href="#" target="_blank" rel="noopener"><span class="detail-icon">↗</span><span><small>Web sitesi</small><b id="websiteText">—</b></span></a>
+        <a class="detail-row" id="addressRow" href="#" target="_blank" rel="noopener"><span class="detail-icon">⌖</span><span><small>Adres</small><b id="addressText">—</b></span></a>
+      </section>
+
+      <div class="socials" id="socials" aria-label="Sosyal medya bağlantıları"></div>
+
+      <div class="main-actions">
+        <button class="primary" id="saveContactBtn" type="button">Kişilere Kaydet (.vcf)</button>
+        <button class="secondary" id="shareBtn" type="button">Kartı Paylaş</button>
+      </div>
+
+      <section class="qr-panel">
+        <div>
+          <h2>QR Kod</h2>
+          <p>Bu kartın paylaşım bağlantısını QR koda dönüştürür.</p>
+        </div>
+        <button class="secondary small" id="makeQrBtn" type="button">QR Oluştur</button>
+        <div id="qrBox" class="qr-box" hidden></div>
+        <input id="shareLink" class="share-link" type="text" readonly hidden aria-label="Paylaşım bağlantısı">
+        <div class="qr-actions" id="qrActions" hidden>
+          <button class="secondary small" id="copyLinkBtn" type="button">Bağlantıyı Kopyala</button>
+          <button class="secondary small" id="downloadQrBtn" type="button">QR PNG Kaydet</button>
+        </div>
+      </section>
+
+      <p class="privacy-note">Veriler sunucuya gönderilmez. Bu sürüm reklam, takip ve analiz kodu içermez.</p>
+    </section>
+  </main>
+
+  <dialog id="editDialog" class="dialog">
+    <form method="dialog" id="editForm">
+      <div class="dialog-head"><div><h2>Kartı Düzenle</h2><p>Kaydettiğiniz bilgiler bu cihazda saklanır.</p></div><button class="close" value="cancel" aria-label="Kapat">×</button></div>
+      <div class="form-grid">
+        <div class="profile-editor wide">
+          <div class="profile-preview-wrap">
+            <div class="profile-preview-fallback" id="profilePreviewFallback">TK</div>
+            <img id="profilePreview" class="profile-preview" alt="Seçilen profil resmi önizlemesi" hidden>
+          </div>
+          <div class="profile-editor-controls">
+            <label class="file-label">Profil Resmi
+              <input id="profileInput" type="file" accept="image/*">
+            </label>
+            <button class="secondary small" id="removeProfileBtn" type="button">Profil Resmini Kaldır</button>
+            <small>JPG, PNG veya WEBP seçebilirsiniz. Görsel cihazda saklanır ve karta solda uygulanır.</small>
+          </div>
+        </div>
+        <label>Ad Soyad<input name="name" maxlength="80" autocomplete="name"></label>
+        <label>Ünvan<input name="title" maxlength="100"></label>
+        <label class="wide">Birim / Açıklama<input name="unit" maxlength="140"></label>
+        <label>Telefon 1<input name="phone1" inputmode="tel" maxlength="30" autocomplete="tel"></label>
+        <label>Telefon 2<input name="phone2" inputmode="tel" maxlength="30"></label>
+        <label>WhatsApp<input name="whatsapp" inputmode="tel" maxlength="30"></label>
+        <label>Kurumsal e-posta<input name="email" inputmode="email" maxlength="120" autocomplete="email"></label>
+        <label class="wide">Açık adres<textarea name="address" maxlength="240" rows="2" autocomplete="street-address"></textarea></label>
+        <label class="wide">Google Maps bağlantısı<input name="maps" inputmode="url" maxlength="300" placeholder="https://maps.google.com/..."></label>
+        <label class="wide">Web sitesi<input name="website" inputmode="url" maxlength="240"></label>
+        <label>Instagram<input name="instagram" inputmode="url" maxlength="240"></label>
+        <label>Facebook<input name="facebook" inputmode="url" maxlength="240"></label>
+        <label>YouTube<input name="youtube" inputmode="url" maxlength="240"></label>
+        <label>WhatsApp Kanalı<input name="whatsappChannel" inputmode="url" maxlength="240"></label>
+      </div>
+      <div class="dialog-actions">
+        <button class="secondary" id="resetBtn" type="button">Varsayılana Dön</button>
+        <button class="primary" id="saveBtn" value="default">Kaydet</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="infoDialog" class="dialog compact">
+    <form method="dialog"><div class="dialog-head"><h2 id="infoTitle">Bilgi</h2><button class="close" value="cancel" aria-label="Kapat">×</button></div><div id="infoBody" class="info-body"></div><div class="dialog-actions"><button class="primary" value="default">Tamam</button></div></form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="assets/qrcode.min.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
